@@ -1,0 +1,8 @@
+learning_rate: 9.4526e-5
+weight_decay: 1.5446e-4
+batch_size: 256
+focal_gamma: 1.0
+hidden_dim: 64
+depth: 3
+ff_dropout: 0.2
+seed: 42

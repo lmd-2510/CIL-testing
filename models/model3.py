@@ -1,0 +1,1 @@
+"""Third model definition placeholder."""
