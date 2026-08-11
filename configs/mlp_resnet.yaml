@@ -1,0 +1,8 @@
+learning_rate: 0.001
+weight_decay: 0.0001
+batch_size: 64
+epochs_per_task: 1
+mlp_embed_dim: 16
+mlp_hidden_dim: 128
+mlp_depth: 3
+mlp_dropout: 0.1

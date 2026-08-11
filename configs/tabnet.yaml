@@ -1,0 +1,10 @@
+learning_rate: 0.001
+weight_decay: 0.0001
+batch_size: 64
+epochs_per_task: 1
+tabnet_embed_dim: 8
+tabnet_hidden_dim: 64
+tabnet_n_steps: 3
+tabnet_transformer_depth: 2
+tabnet_dropout: 0.1
+tabnet_gamma: 1.5
