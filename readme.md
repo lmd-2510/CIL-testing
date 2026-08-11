@@ -9,7 +9,7 @@ Chuyển đổi mô hình T-DDI v1.0.0 (Tabular Drug-Drug Interaction) từ bài
 - [x] 1. Đọc và hiểu kiến trúc T-DDI v1.0.0, dữ liệu và pipeline.
 - [x] 2. Chuyển DDI dataset thành CIL scenario (`data/ddi_incremental.py`).
 - [x] 3. Tái thiết lập cấu trúc repo để sẵn sàng adapt T-DDI thành CIL-compatible model.
-- [ ] 4. Survey và chọn thêm 2 model architecture (`model2.py`, `model3.py`).
+- [ ] 4. Survey và chọn thêm 2 model architecture (`mlp_resnet.py`, `model3.py`).
 - [ ] 5. Chuẩn hóa interface thư mục/mô-đun để 3 models dùng chung data/framework.
 - [x] 6. Implement Naive Fine-tuning baseline (`methods/finetune.py`).
 - [x] 7. Implement EWC (`methods/ewc.py`).
@@ -30,12 +30,11 @@ Chuyển đổi mô hình T-DDI v1.0.0 (Tabular Drug-Drug Interaction) từ bài
 - Phần dataset thật để train/evaluate đầy đủ vẫn có thể để sau; hiện ưu tiên tiếp tục hoàn thiện benchmark bằng cách bổ sung thêm model.
 
 ## 2.2 VIỆC CẦN LÀM TIẾP THEO
-1. Hoàn thiện `models/model2.py` với `build_model_for_cil(...)`.
-2. Hoàn thiện `models/model3.py` với `build_model_for_cil(...)`.
-3. Chạy smoke test end-to-end bằng dữ liệu nhỏ hoặc mock data:
+1. Hoàn thiện `models/model3.py` với `build_model_for_cil(...)`.
+2. Chạy smoke test end-to-end bằng dữ liệu nhỏ hoặc mock data:
    `main.py -> trainer.py -> method -> model -> evaluator.py`
-4. Nếu smoke test ổn, cập nhật lại `trainer.py` hoặc config nếu cần để support nhiều lựa chọn model/method hơn.
-5. Khi framework ổn định, mới chuyển sang dataset thật và train benchmark đầy đủ.
+3. Nếu smoke test ổn, cập nhật lại `trainer.py` hoặc config nếu cần để support nhiều lựa chọn model/method hơn.
+4. Khi framework ổn định, mới chuyển sang dataset thật và train benchmark đầy đủ.
 
 ---
 
@@ -58,7 +57,7 @@ CIL-testing/
 │   └── agem.py                     # [ĐÃ XONG] Averaged Gradient Episodic Memory
 ├── models/
 │   ├── tddi.py                     # [ĐÃ ADAPT] T-DDI dùng chung cho CIL
-│   ├── model2.py                   # [CẦN VIẾT]
+│   ├── mlp_resnet.py               # [ĐÃ XONG] MLP/ResNet tabular cho CIL
 │   └── model3.py                   # [CẦN VIẾT]
 ├── PyBioMed/
 ├── utils.py

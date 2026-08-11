@@ -1,1 +1,0 @@
-"""Second model definition placeholder."""

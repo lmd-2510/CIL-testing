@@ -10,7 +10,7 @@ from utils import get_device, json_safe, load_config_defaults, set_seed
 
 DEFAULT_CONFIG_PATH = "configs/tddi.yaml"
 DEFAULT_RESULTS_DIR = "results"
-SUPPORTED_MODELS = {"tddi", "model2", "model3"}
+SUPPORTED_MODELS = {"tddi", "mlp_resnet", "model3"}
 SUPPORTED_METHODS = {"finetune", "ewc", "gem", "agem"}
 
 
