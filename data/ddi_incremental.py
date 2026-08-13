@@ -2,6 +2,8 @@ import os
 import torch
 import pandas as pd
 import numpy as np
+import time
+from datetime import datetime
 from typing import Tuple, List, Dict, Optional
 from torch.utils.data import Dataset, DataLoader
 
@@ -10,6 +12,11 @@ try:
     from .preprocessing import load_and_clean_data, preprocess_ultra_fast
 except ImportError:
     from preprocessing import load_and_clean_data, preprocess_ultra_fast
+
+
+def log_stage(message: str) -> None:
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"[{timestamp}] {message}", flush=True)
 
 
 class DDIDataset(Dataset):
@@ -110,7 +117,10 @@ class DDIIncrementalDataManager:
         print("=== BƯỚC 1: NẠP VÀ TIỀN XỬ LÝ DỮ LIỆU TOÀN CỤC ===")
 
         # 1. Đường dẫn file
+        step_start = time.perf_counter()
+        log_stage("[DATA] Step 1 start: load and preprocess global data")
         train_path = os.path.join(self.data_dir, self.train_filename)
+        log_stage(f"[DATA] Loading train file: {train_path}")
 
         # 2. Đọc file thô bằng Polars (thông qua preprocessing.py)
         print(f"Đang đọc dữ liệu train từ: {train_path}")
@@ -121,20 +131,25 @@ class DDIIncrementalDataManager:
 
         # Tách tập test/valid từ train nếu không cung cấp file riêng
         if self.test_filename and os.path.exists(os.path.join(self.data_dir, self.test_filename)):
+            log_stage(f"[DATA] Loading test file: {os.path.join(self.data_dir, self.test_filename)}")
             test_df = load_and_clean_data(
                 os.path.join(self.data_dir, self.test_filename), self.columns_to_drop
             )
         else:
+            log_stage("[DATA] No test file found/provided; using empty test dataframe")
             test_df = pd.DataFrame(columns=train_df.columns)
 
         if self.valid_filename and os.path.exists(os.path.join(self.data_dir, self.valid_filename)):
+            log_stage(f"[DATA] Loading valid file: {os.path.join(self.data_dir, self.valid_filename)}")
             valid_df = load_and_clean_data(
                 os.path.join(self.data_dir, self.valid_filename), self.columns_to_drop
             )
         else:
+            log_stage("[DATA] No valid file found/provided; using empty valid dataframe")
             valid_df = pd.DataFrame(columns=train_df.columns)
 
         # 3. Tiến hành mã hóa toàn cục bằng preprocess_ultra_fast
+        log_stage("[DATA] Starting global preprocessing")
         (
             self.X_train,
             self.y_train,
@@ -148,6 +163,7 @@ class DDIIncrementalDataManager:
         ) = preprocess_ultra_fast(
             train_df, test_df, valid_df, target_col=self.target_col
         )
+        log_stage("[DATA] Global preprocessing finished")
 
         # 4. Trích xuất metadata toàn cục
         self.num_continuous = len(self.numerical_cols)
@@ -171,6 +187,8 @@ class DDIIncrementalDataManager:
         print(f" - Số biến Continuous: {self.num_continuous}")
         print(f" - Tổng số Lớp DDI (num_classes): {self.num_classes}")
         print(f" - Kích thước tập Train: {self.X_train.shape}")
+        elapsed = time.perf_counter() - step_start
+        log_stage(f"[DATA] Step 1 done | elapsed={elapsed:.1f}s")
 
     def split_tasks(
             self,
@@ -191,6 +209,8 @@ class DDIIncrementalDataManager:
             Dict[int, List[int]]: Dictionary ánh xạ task_id -> danh sách các
             class nhãn thuộc task đó.
         """
+        step_start = time.perf_counter()
+        log_stage(f"[TASK] Step 2 start: split {self.num_classes} classes into CIL tasks")
         print(f"\n=== STEP 2: SPLIT {self.num_classes} CLASSES INTO CIL TASKS ===")
 
         if self.num_classes == 0 or self.y_train is None:
@@ -273,7 +293,8 @@ class DDIIncrementalDataManager:
                 self.valid_task_indices[task_id] = np.array([], dtype=int)
 
         # In thông tin tổng quan sau khi chia Task
-        print(f"-> Created {self.num_tasks} tasks | class_order={class_order}:")
+        elapsed = time.perf_counter() - step_start
+        print(f"-> Created {self.num_tasks} tasks | class_order={class_order} | elapsed={elapsed:.1f}s:")
         for task_id, cls_list in self.task_classes.items():
             num_train = len(self.train_task_indices[task_id])
             num_test = len(self.test_task_indices[task_id])
