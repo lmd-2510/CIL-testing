@@ -1,0 +1,12 @@
+learning_rate: 0.001
+weight_decay: 0.0001
+batch_size: 64
+epochs_per_task: 1
+num_tasks: 10
+class_order: balanced
+deepddi_embed_dim: 16
+deepddi_descriptor_dim: 512
+deepddi_hidden_dim: 512
+deepddi_depth: 3
+deepddi_dropout: 0.3
+deepddi_batch_norm: true
