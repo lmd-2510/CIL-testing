@@ -10,7 +10,7 @@ from utils import get_device, json_safe, load_config_defaults, set_seed
 
 DEFAULT_CONFIG_PATH = "configs/tddi.yaml"
 DEFAULT_RESULTS_DIR = "results"
-SUPPORTED_MODELS = {"tddi", "mlp_resnet", "tabnet"}
+SUPPORTED_MODELS = {"tddi", "mlp_resnet", "tabnet", "deepddi_mlp"}
 SUPPORTED_METHODS = {"finetune", "ewc", "gem", "agem"}
 
 
@@ -27,8 +27,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--columns-to-drop", nargs="*", default=None)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=None)
-    parser.add_argument("--num-tasks", type=int, default=5)
+    parser.add_argument("--num-tasks", type=int, default=None)
     parser.add_argument("--classes-per-task", type=int, default=None)
+    parser.add_argument(
+        "--class-order",
+        type=str,
+        default=None,
+        choices=["balanced", "random", "ordered"],
+        help="How to assign DDI classes to CIL tasks. Default: balanced.",
+    )
     parser.add_argument("--shuffle-classes", action="store_true")
     parser.add_argument("--num-workers", type=int, default=0)
     parser.add_argument("--model", type=str, default="tddi", choices=sorted(SUPPORTED_MODELS))
@@ -150,6 +157,7 @@ def print_summary(summary: Dict[str, Any]) -> None:
     print(f"Target column   : {summary['data']['target_col']}")
     print(f"Num classes     : {summary['data']['num_classes']}")
     print(f"Num tasks       : {summary['data']['num_tasks']}")
+    print(f"Class order     : {summary['data']['class_order']}")
     print(f"Categorical cols: {summary['data']['num_categorical']}")
     print(f"Continuous cols : {summary['data']['num_continuous']}")
     print(f"Batch size      : {summary['runtime']['batch_size']}")
@@ -197,6 +205,10 @@ def main() -> None:
     config_defaults = load_config_defaults(args.config)
     args.seed = resolve_setting(args.seed, config_defaults.get("seed"), 42)
     args.batch_size = resolve_setting(args.batch_size, config_defaults.get("batch_size"), 256)
+    args.num_tasks = resolve_setting(args.num_tasks, config_defaults.get("num_tasks"), 10)
+    args.class_order = resolve_setting(
+        args.class_order, config_defaults.get("class_order"), "balanced"
+    )
     args.columns_to_drop = normalize_columns_to_drop(args.columns_to_drop)
     args.run_name = args.run_name or build_run_name(args.model, args.method)
 
@@ -209,6 +221,7 @@ def main() -> None:
         num_tasks=args.num_tasks,
         classes_per_task=args.classes_per_task,
         shuffle_classes=args.shuffle_classes,
+        class_order=args.class_order,
     )
 
     summary: Dict[str, Any] = {
@@ -231,6 +244,7 @@ def main() -> None:
             "num_categorical": len(data_manager.categorical_cols),
             "num_continuous": data_manager.num_continuous,
             "categories": data_manager.categories,
+            "class_order": args.class_order,
         },
         "runtime": {
             "seed": args.seed,

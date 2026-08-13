@@ -174,9 +174,10 @@ class DDIIncrementalDataManager:
 
     def split_tasks(
             self,
-            num_tasks: int = 5,
+            num_tasks: int = 10,
             classes_per_task: Optional[int] = None,
             shuffle_classes: bool = False,
+            class_order: str = "balanced",
         ) -> Dict[int, List[int]]:
         """BƯỚC 2: Phân chia tổng số lớp DDI thành các Task tăng dần (CIL Tasks).
 
@@ -190,7 +191,7 @@ class DDIIncrementalDataManager:
             Dict[int, List[int]]: Dictionary ánh xạ task_id -> danh sách các
             class nhãn thuộc task đó.
         """
-        print(f"\n=== BƯỚC 2: PHÂN CHIA {self.num_classes} LỚP THÀNH CÁC TASKS TĂNG DẦN ===")
+        print(f"\n=== STEP 2: SPLIT {self.num_classes} CLASSES INTO CIL TASKS ===")
 
         if self.num_classes == 0 or self.y_train is None:
             raise ValueError("Chưa chạy prepare_global_data() hoặc dữ liệu rỗng. Hãy chạy Bước 1 trước.")
@@ -200,8 +201,10 @@ class DDIIncrementalDataManager:
 
         # 1. Xáo trộn thứ tự các class nếu cần
         if shuffle_classes:
-            np.random.seed(self.seed)
-            np.random.shuffle(all_classes)
+            class_order = "random"
+        class_order = class_order.lower().strip()
+        if class_order not in {"balanced", "random", "ordered"}:
+            raise ValueError("class_order must be one of: balanced, random, ordered.")
 
         # 2. Xử lý số lớp mỗi Task
         if classes_per_task is not None and classes_per_task > 0:
@@ -213,9 +216,42 @@ class DDIIncrementalDataManager:
         self.task_classes: Dict[int, List[int]] = {}
         
         # Cắt nhỏ mảng class thành num_tasks phần
-        splits = np.array_split(all_classes, self.num_tasks)
-        for task_id, cls_list in enumerate(splits):
-            self.task_classes[task_id] = cls_list.tolist()
+        if class_order == "balanced":
+            class_counts = {
+                int(cls): int(np.sum(self.y_train == cls))
+                for cls in all_classes
+            }
+            sorted_classes = sorted(
+                class_counts.keys(),
+                key=lambda cls: (-class_counts[cls], cls),
+            )
+            task_loads = [0 for _ in range(self.num_tasks)]
+            task_class_lists = [[] for _ in range(self.num_tasks)]
+
+            for cls in sorted_classes:
+                task_id = int(np.argmin(task_loads))
+                task_class_lists[task_id].append(cls)
+                task_loads[task_id] += class_counts[cls]
+
+            self.task_classes = {
+                task_id: sorted(cls_list)
+                for task_id, cls_list in enumerate(task_class_lists)
+                if len(cls_list) > 0
+            }
+            self.num_tasks = len(self.task_classes)
+        else:
+            ordered_classes = all_classes.copy()
+            if class_order == "random":
+                rng = np.random.default_rng(self.seed)
+                rng.shuffle(ordered_classes)
+
+            splits = np.array_split(ordered_classes, self.num_tasks)
+            self.task_classes = {
+                task_id: cls_list.tolist()
+                for task_id, cls_list in enumerate(splits)
+                if len(cls_list) > 0
+            }
+            self.num_tasks = len(self.task_classes)
 
         # 4. Tìm vị trí (row indices) của từng Task trong tập Train, Test, Valid
         self.train_task_indices: Dict[int, np.ndarray] = {}
@@ -237,13 +273,13 @@ class DDIIncrementalDataManager:
                 self.valid_task_indices[task_id] = np.array([], dtype=int)
 
         # In thông tin tổng quan sau khi chia Task
-        print(f"-> Chia thành công {self.num_tasks} Tasks:")
+        print(f"-> Created {self.num_tasks} tasks | class_order={class_order}:")
         for task_id, cls_list in self.task_classes.items():
             num_train = len(self.train_task_indices[task_id])
             num_test = len(self.test_task_indices[task_id])
             print(
                 f"  * Task {task_id}: {len(cls_list)} classes "
-                f"(Danh sách Class: {cls_list[:3]}...{cls_list[-1:] if len(cls_list)>3 else ''}) "
+                f"(Classes: {cls_list[:3]}...{cls_list[-1:] if len(cls_list)>3 else ''}) "
                 f"| Train samples: {num_train} | Test samples: {num_test}"
             )
 
