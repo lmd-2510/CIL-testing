@@ -97,6 +97,12 @@ class ContinualTrainer:
             "model": self.config.model_name,
             "method": self.config.method_name,
             "epochs_per_task": self.config.epochs_per_task,
+            "config_path": self.summary.get("config_path"),
+            "config_defaults": self.summary.get("config_defaults", {}),
+            "method_config": self.summary.get("method_config", {}),
+            "data": self.summary.get("data", {}),
+            "runtime": self.summary.get("runtime", {}),
+            "tasks": self.summary.get("tasks", []),
             "task_results": [json_safe(task.__dict__) for task in self.task_results],
             "continual_metrics": summarize_cl_metrics(self.matrix_evaluations),
         }
@@ -202,14 +208,33 @@ class ContinualTrainer:
         return output_path
 
 
-def load_method(name: str) -> CLMethod:
+def resolve_method_kwargs(name: str, summary: Dict[str, Any]) -> Dict[str, Any]:
+    config_defaults = summary.get("config_defaults", {})
+    method_kwargs: Dict[str, Any] = {}
+
+    if name == "ewc":
+        if "ewc_lambda" in config_defaults:
+            method_kwargs["ewc_lambda"] = config_defaults["ewc_lambda"]
+        if "fisher_n_batches" in config_defaults:
+            method_kwargs["fisher_n_batches"] = config_defaults["fisher_n_batches"]
+    elif name == "gem":
+        if "gem_memory_strength" in config_defaults:
+            method_kwargs["memory_strength"] = config_defaults["gem_memory_strength"]
+
+    return method_kwargs
+
+
+def load_method(name: str, summary: Dict[str, Any]) -> CLMethod:
     module = importlib.import_module(f"methods.{name}")
     builder = getattr(module, "build_method", None)
     if builder is None:
         raise NotImplementedError(
             f"methods/{name}.py chua co `build_method()`. Hoan thien method nay truoc khi train."
         )
-    return builder()
+
+    method_kwargs = resolve_method_kwargs(name, summary)
+    summary["method_config"] = method_kwargs
+    return builder(**method_kwargs)
 
 
 def load_model(
@@ -264,7 +289,7 @@ def run_experiment(summary: Dict[str, Any], data_manager: Any) -> Dict[str, Any]
         data_manager=data_manager,
         device=config.device,
     )
-    method = load_method(config.method_name)
+    method = load_method(config.method_name, summary)
     optimizer = build_optimizer(model, summary)
 
     trainer = ContinualTrainer(
