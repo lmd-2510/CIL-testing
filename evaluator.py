@@ -194,6 +194,44 @@ def compute_mean_forgetting(result_matrix: np.ndarray) -> float:
     return float(np.mean(valid))
 
 
+def compute_backward_transfer(result_matrix: np.ndarray) -> float:
+    """BWT = final performance on old tasks - performance right after learning them."""
+    num_tasks = result_matrix.shape[0]
+    if num_tasks <= 1:
+        return float("nan")
+
+    final_row = result_matrix[num_tasks - 1]
+    values = []
+    for task_id in range(num_tasks - 1):
+        final_score = final_row[task_id]
+        learned_score = result_matrix[task_id, task_id]
+        if not np.isnan(final_score) and not np.isnan(learned_score):
+            values.append(float(final_score - learned_score))
+    if not values:
+        return float("nan")
+    return float(np.mean(values))
+
+
+def compute_forward_transfer(result_matrix: np.ndarray) -> float:
+    """Raw FWT = performance on task i before training task i.
+
+    This uses R[i-1, i], so trainer must evaluate the next unseen task after
+    each stage. No random/init baseline is subtracted.
+    """
+    num_tasks = result_matrix.shape[0]
+    if num_tasks <= 1:
+        return float("nan")
+
+    values = []
+    for task_id in range(1, num_tasks):
+        score_before_learning = result_matrix[task_id - 1, task_id]
+        if not np.isnan(score_before_learning):
+            values.append(float(score_before_learning))
+    if not values:
+        return float("nan")
+    return float(np.mean(values))
+
+
 def summarize_cl_metrics(
     evaluations_by_stage: List[List[TaskEvaluation]],
     primary_metric: str = "accuracy",
@@ -205,4 +243,7 @@ def summarize_cl_metrics(
         "average_accuracy": compute_average_accuracy(result_matrix),
         "forgetting_per_task": compute_forgetting_per_task(result_matrix),
         "mean_forgetting": compute_mean_forgetting(result_matrix),
+        "backward_transfer": compute_backward_transfer(result_matrix),
+        "forward_transfer": compute_forward_transfer(result_matrix),
+        "forward_transfer_note": "Raw FWT from R[i-1,i]; no random/init baseline subtracted.",
     }

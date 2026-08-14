@@ -62,6 +62,7 @@ class TaskMetrics:
     eval_current: Optional[Dict[str, float]] = None
     eval_cumulative: Optional[Dict[str, float]] = None
     eval_seen_tasks: List[Dict[str, Any]] = field(default_factory=list)
+    eval_next_task: Optional[Dict[str, Any]] = None
 
 
 class ContinualTrainer:
@@ -82,7 +83,7 @@ class ContinualTrainer:
         self.method = method
         self.task_results: List[TaskMetrics] = []
         self.evaluator = CILEvaluator(device=self.config.device)
-        self.seen_task_evaluations: List[List[Any]] = []
+        self.matrix_evaluations: List[List[Any]] = []
 
     def run(self) -> Dict[str, Any]:
         print("\n=== Start continual training ===")
@@ -97,7 +98,7 @@ class ContinualTrainer:
             "method": self.config.method_name,
             "epochs_per_task": self.config.epochs_per_task,
             "task_results": [json_safe(task.__dict__) for task in self.task_results],
-            "continual_metrics": summarize_cl_metrics(self.seen_task_evaluations),
+            "continual_metrics": summarize_cl_metrics(self.matrix_evaluations),
         }
         self._save_results(payload)
         return payload
@@ -134,7 +135,22 @@ class ContinualTrainer:
             batch_size=self.config.batch_size,
             num_workers=self.config.num_workers,
         )
-        self.seen_task_evaluations.append(seen_evaluations)
+        stage_evaluations = list(seen_evaluations)
+
+        next_task_id = task_id + 1
+        if next_task_id in self.data_manager.task_classes:
+            next_evaluation = self.evaluator.evaluate_single_task(
+                model=self.model,
+                data_manager=self.data_manager,
+                eval_task_id=next_task_id,
+                batch_size=self.config.batch_size,
+                num_workers=self.config.num_workers,
+            )
+            next_evaluation.train_task_id = task_id
+            stage_evaluations.append(next_evaluation)
+            task_metrics.eval_next_task = json_safe(next_evaluation.__dict__)
+
+        self.matrix_evaluations.append(stage_evaluations)
         task_metrics.eval_seen_tasks = [json_safe(evaluation.__dict__) for evaluation in seen_evaluations]
         task_metrics.eval_current = seen_evaluations[-1].metrics if seen_evaluations else None
         task_metrics.eval_cumulative = self.evaluator.evaluate_cumulative(
