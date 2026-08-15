@@ -52,7 +52,39 @@ def load_and_clean_data(path, columns_to_drop):
         return None
 
 
-def preprocess_ultra_fast(train_df, test_df, valid_df, target_col='class'):
+def _scale_numerical_columns(train_df, test_df, valid_df, numerical_cols, chunk_size=256):
+    if not numerical_cols:
+        return train_df, test_df, valid_df, None
+
+    log_stage(f"[PREPROCESS] Scaling numerical columns in chunks | cols={len(numerical_cols)}")
+    stats = {}
+    for start in range(0, len(numerical_cols), chunk_size):
+        cols = numerical_cols[start : start + chunk_size]
+        train_values = train_df[cols].astype(np.float32)
+        means = train_values.mean(axis=0)
+        stds = train_values.std(axis=0).replace(0, 1.0).fillna(1.0)
+
+        train_df.loc[:, cols] = ((train_values - means) / stds).astype(np.float32)
+        if len(test_df) > 0:
+            test_df.loc[:, cols] = ((test_df[cols].astype(np.float32) - means) / stds).astype(np.float32)
+        if len(valid_df) > 0:
+            valid_df.loc[:, cols] = ((valid_df[cols].astype(np.float32) - means) / stds).astype(np.float32)
+
+        stats.update({
+            col: {"mean": float(means[col]), "std": float(stds[col])}
+            for col in cols
+        })
+
+    return train_df, test_df, valid_df, stats
+
+
+def preprocess_ultra_fast(
+    train_df,
+    test_df,
+    valid_df,
+    target_col='class',
+    scale_numerical: bool = True,
+):
     start_time = time.perf_counter()
     log_stage("[PREPROCESS] Start global preprocessing")
     X_train = train_df.drop(columns=[target_col])
@@ -114,6 +146,15 @@ def preprocess_ultra_fast(train_df, test_df, valid_df, target_col='class'):
                 pbar.update(1)
     
     scaler = None
+    if scale_numerical:
+        X_train, X_test, X_valid, scaler = _scale_numerical_columns(
+            X_train,
+            X_test,
+            X_valid,
+            numerical_cols,
+        )
+    elif numerical_cols:
+        log_stage("[PREPROCESS] Numerical scaling disabled")
 
     preprocessors = {
         'feature_engineer': None,

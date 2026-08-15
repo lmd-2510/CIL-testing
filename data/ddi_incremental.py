@@ -83,6 +83,7 @@ class DDIIncrementalDataManager:
         columns_to_drop: Optional[List[str]] = None,
         target_col: str = "class",
         seed: int = 42,
+        scale_numerical: bool = True,
     ):
         self.data_dir = data_dir
         self.train_filename = train_filename
@@ -91,6 +92,7 @@ class DDIIncrementalDataManager:
         self.columns_to_drop = columns_to_drop or []
         self.target_col = target_col
         self.seed = seed
+        self.scale_numerical = scale_numerical
 
         # Metadata toàn cục (dùng cho TabTransformer và các models khác)
         self.categories: List[int] = []  # Số lượng giá trị duy nhất của từng cột categorical
@@ -161,7 +163,11 @@ class DDIIncrementalDataManager:
             self.numerical_cols,
             self.preprocessors,
         ) = preprocess_ultra_fast(
-            train_df, test_df, valid_df, target_col=self.target_col
+            train_df,
+            test_df,
+            valid_df,
+            target_col=self.target_col,
+            scale_numerical=self.scale_numerical,
         )
         log_stage("[DATA] Global preprocessing finished")
 

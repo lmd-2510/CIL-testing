@@ -5,10 +5,32 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Protocol, Tuple
 
 import torch
+import torch.nn as nn
 from torch.utils.data import DataLoader
 
 from evaluator import CILEvaluator, summarize_cl_metrics
 from utils import MemoryOptimizer, json_safe, save_checkpoint
+
+
+class FocalLoss(nn.Module):
+    def __init__(
+        self,
+        gamma: float = 1.0,
+        weight: Optional[torch.Tensor] = None,
+    ):
+        super().__init__()
+        self.gamma = gamma
+        self.register_buffer("weight", weight if weight is not None else None)
+
+    def forward(self, logits: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
+        ce_loss = nn.functional.cross_entropy(
+            logits,
+            targets,
+            weight=self.weight,
+            reduction="none",
+        )
+        pt = torch.exp(-ce_loss)
+        return (((1.0 - pt) ** self.gamma) * ce_loss).mean()
 
 
 class SupportsForward(Protocol):
@@ -100,6 +122,7 @@ class ContinualTrainer:
             "config_path": self.summary.get("config_path"),
             "config_defaults": self.summary.get("config_defaults", {}),
             "method_config": self.summary.get("method_config", {}),
+            "criterion_config": self.summary.get("criterion_config", {}),
             "data": self.summary.get("data", {}),
             "runtime": self.summary.get("runtime", {}),
             "tasks": self.summary.get("tasks", []),
@@ -224,7 +247,11 @@ def resolve_method_kwargs(name: str, summary: Dict[str, Any]) -> Dict[str, Any]:
     return method_kwargs
 
 
-def load_method(name: str, summary: Dict[str, Any]) -> CLMethod:
+def load_method(
+    name: str,
+    summary: Dict[str, Any],
+    criterion: Optional[nn.Module] = None,
+) -> CLMethod:
     module = importlib.import_module(f"methods.{name}")
     builder = getattr(module, "build_method", None)
     if builder is None:
@@ -233,7 +260,13 @@ def load_method(name: str, summary: Dict[str, Any]) -> CLMethod:
         )
 
     method_kwargs = resolve_method_kwargs(name, summary)
-    summary["method_config"] = method_kwargs
+    if criterion is not None:
+        method_kwargs["criterion"] = criterion
+    summary["method_config"] = {
+        key: value
+        for key, value in method_kwargs.items()
+        if key != "criterion"
+    }
     return builder(**method_kwargs)
 
 
@@ -259,6 +292,39 @@ def build_optimizer(model: SupportsForward, summary: Dict[str, Any]) -> torch.op
     learning_rate = runtime.get("learning_rate", config_defaults.get("learning_rate", 1e-3))
     weight_decay = runtime.get("weight_decay", config_defaults.get("weight_decay", 0.0))
     return torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+
+
+def build_class_weights(summary: Dict[str, Any], data_manager: Any, device: torch.device) -> Optional[torch.Tensor]:
+    config_defaults = summary.get("config_defaults", {})
+    if not config_defaults.get("use_class_weights", True):
+        return None
+
+    counts = torch.bincount(
+        torch.as_tensor(data_manager.y_train, dtype=torch.long),
+        minlength=data_manager.num_classes,
+    ).float()
+    counts = counts.clamp_min(1.0)
+
+    power = float(config_defaults.get("class_weight_power", 0.5))
+    weights = counts.sum() / (counts * float(data_manager.num_classes))
+    weights = weights.pow(power)
+
+    max_weight = config_defaults.get("max_class_weight", 10.0)
+    if max_weight is not None:
+        weights = weights.clamp(max=float(max_weight))
+
+    weights = weights / weights.mean()
+    return weights.to(device)
+
+
+def build_criterion(summary: Dict[str, Any], data_manager: Any, device: torch.device) -> nn.Module:
+    config_defaults = summary.get("config_defaults", {})
+    class_weights = build_class_weights(summary, data_manager, device)
+    focal_gamma = config_defaults.get("focal_gamma", None)
+
+    if focal_gamma is not None and float(focal_gamma) > 0:
+        return FocalLoss(gamma=float(focal_gamma), weight=class_weights)
+    return nn.CrossEntropyLoss(weight=class_weights)
 
 
 def build_trainer_config(summary: Dict[str, Any]) -> TrainerConfig:
@@ -289,7 +355,15 @@ def run_experiment(summary: Dict[str, Any], data_manager: Any) -> Dict[str, Any]
         data_manager=data_manager,
         device=config.device,
     )
-    method = load_method(config.method_name, summary)
+    criterion = build_criterion(summary, data_manager, config.device)
+    summary["criterion_config"] = {
+        "name": criterion.__class__.__name__,
+        "focal_gamma": summary.get("config_defaults", {}).get("focal_gamma"),
+        "use_class_weights": summary.get("config_defaults", {}).get("use_class_weights", True),
+        "class_weight_power": summary.get("config_defaults", {}).get("class_weight_power", 0.5),
+        "max_class_weight": summary.get("config_defaults", {}).get("max_class_weight", 10.0),
+    }
+    method = load_method(config.method_name, summary, criterion=criterion)
     optimizer = build_optimizer(model, summary)
 
     trainer = ContinualTrainer(

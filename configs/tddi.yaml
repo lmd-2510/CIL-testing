@@ -5,9 +5,13 @@ batch_size: 256
 learning_rate: 9.4526e-5
 weight_decay: 1.5446e-4
 class_order: random
+scale_numerical: true
 
 # T-DDI model config
 focal_gamma: 1.0
+use_class_weights: true
+class_weight_power: 0.5
+max_class_weight: 10.0
 hidden_dim: 64
 depth: 3
 ff_dropout: 0.2

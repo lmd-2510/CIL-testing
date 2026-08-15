@@ -1,0 +1,3460 @@
+{
+  "run_name": "tddi_gem_10cls_1epoch",
+  "model": "tddi",
+  "method": "gem",
+  "epochs_per_task": 1,
+  "config_path": "configs/tddi.yaml",
+  "config_defaults": {
+    "seed": 42,
+    "epochs_per_task": 1,
+    "batch_size": 256,
+    "learning_rate": 9.4526e-05,
+    "weight_decay": 0.00015446,
+    "class_order": "random",
+    "focal_gamma": 1.0,
+    "hidden_dim": 64,
+    "depth": 3,
+    "ff_dropout": 0.2,
+    "memory_samples_per_class": 10,
+    "gem_memory_strength": 0.5,
+    "ewc_lambda": 10.0,
+    "fisher_n_batches": 50
+  },
+  "method_config": {
+    "memory_strength": 0.5
+  },
+  "data": {
+    "data_dir": "../data/raw/data_splits",
+    "train_file": "train_extracted.csv",
+    "test_file": "test_extracted.csv",
+    "valid_file": "validation_extracted.csv",
+    "target_col": "class",
+    "columns_to_drop": [],
+    "num_classes": 178,
+    "num_tasks": 18,
+    "num_categorical": 6,
+    "num_continuous": 3780,
+    "categories": [
+      2865,
+      2771,
+      2865,
+      2771,
+      2865,
+      2771
+    ],
+    "class_order": "random"
+  },
+  "runtime": {
+    "seed": 42,
+    "batch_size": 256,
+    "num_workers": 0,
+    "shuffle_classes": false,
+    "classes_per_task": 10
+  },
+  "tasks": [
+    {
+      "task_id": 0,
+      "num_classes": 10,
+      "classes": [
+        160,
+        120,
+        7,
+        135,
+        50,
+        24,
+        130,
+        82,
+        33,
+        133
+      ],
+      "train_samples": 13149,
+      "test_samples": 4384,
+      "valid_samples": 4383
+    },
+    {
+      "task_id": 1,
+      "num_classes": 10,
+      "classes": [
+        88,
+        38,
+        25,
+        46,
+        20,
+        146,
+        51,
+        54,
+        37,
+        56
+      ],
+      "train_samples": 18851,
+      "test_samples": 6283,
+      "valid_samples": 6282
+    },
+    {
+      "task_id": 2,
+      "num_classes": 10,
+      "classes": [
+        75,
+        9,
+        112,
+        86,
+        92,
+        145,
+        79,
+        175,
+        3,
+        117
+      ],
+      "train_samples": 28505,
+      "test_samples": 9503,
+      "valid_samples": 9501
+    },
+    {
+      "task_id": 3,
+      "num_classes": 10,
+      "classes": [
+        131,
+        155,
+        108,
+        8,
+        67,
+        70,
+        162,
+        121,
+        89,
+        158
+      ],
+      "train_samples": 9855,
+      "test_samples": 3283,
+      "valid_samples": 3286
+    },
+    {
+      "task_id": 4,
+      "num_classes": 10,
+      "classes": [
+        169,
+        157,
+        170,
+        32,
+        4,
+        52,
+        114,
+        2,
+        68,
+        81
+      ],
+      "train_samples": 5555,
+      "test_samples": 1851,
+      "valid_samples": 1852
+    },
+    {
+      "task_id": 5,
+      "num_classes": 10,
+      "classes": [
+        28,
+        138,
+        125,
+        84,
+        12,
+        177,
+        176,
+        148,
+        0,
+        127
+      ],
+      "train_samples": 68023,
+      "test_samples": 22672,
+      "valid_samples": 22676
+    },
+    {
+      "task_id": 6,
+      "num_classes": 10,
+      "classes": [
+        115,
+        27,
+        94,
+        62,
+        80,
+        66,
+        126,
+        103,
+        147,
+        167
+      ],
+      "train_samples": 9641,
+      "test_samples": 3215,
+      "valid_samples": 3214
+    },
+    {
+      "task_id": 7,
+      "num_classes": 10,
+      "classes": [
+        13,
+        174,
+        85,
+        5,
+        161,
+        48,
+        156,
+        100,
+        104,
+        124
+      ],
+      "train_samples": 150312,
+      "test_samples": 50103,
+      "valid_samples": 50106
+    },
+    {
+      "task_id": 8,
+      "num_classes": 10,
+      "classes": [
+        134,
+        171,
+        90,
+        152,
+        123,
+        83,
+        45,
+        106,
+        18,
+        118
+      ],
+      "train_samples": 8516,
+      "test_samples": 2840,
+      "valid_samples": 2837
+    },
+    {
+      "task_id": 9,
+      "num_classes": 10,
+      "classes": [
+        78,
+        101,
+        72,
+        173,
+        91,
+        73,
+        98,
+        21,
+        107,
+        93
+      ],
+      "train_samples": 6014,
+      "test_samples": 2006,
+      "valid_samples": 2004
+    },
+    {
+      "task_id": 10,
+      "num_classes": 10,
+      "classes": [
+        119,
+        87,
+        59,
+        65,
+        153,
+        99,
+        71,
+        143,
+        132,
+        26
+      ],
+      "train_samples": 25278,
+      "test_samples": 8427,
+      "valid_samples": 8426
+    },
+    {
+      "task_id": 11,
+      "num_classes": 10,
+      "classes": [
+        111,
+        159,
+        96,
+        166,
+        74,
+        10,
+        128,
+        29,
+        63,
+        95
+      ],
+      "train_samples": 1722,
+      "test_samples": 575,
+      "valid_samples": 574
+    },
+    {
+      "task_id": 12,
+      "num_classes": 10,
+      "classes": [
+        55,
+        116,
+        1,
+        42,
+        122,
+        17,
+        39,
+        168,
+        53,
+        76
+      ],
+      "train_samples": 8785,
+      "test_samples": 2930,
+      "valid_samples": 2928
+    },
+    {
+      "task_id": 13,
+      "num_classes": 10,
+      "classes": [
+        142,
+        40,
+        69,
+        150,
+        129,
+        149,
+        105,
+        172,
+        11,
+        43
+      ],
+      "train_samples": 3252,
+      "test_samples": 1084,
+      "valid_samples": 1083
+    },
+    {
+      "task_id": 14,
+      "num_classes": 10,
+      "classes": [
+        154,
+        61,
+        57,
+        144,
+        23,
+        151,
+        15,
+        60,
+        109,
+        137
+      ],
+      "train_samples": 56901,
+      "test_samples": 18966,
+      "valid_samples": 18968
+    },
+    {
+      "task_id": 15,
+      "num_classes": 10,
+      "classes": [
+        31,
+        16,
+        44,
+        165,
+        34,
+        30,
+        58,
+        35,
+        77,
+        49
+      ],
+      "train_samples": 21816,
+      "test_samples": 7272,
+      "valid_samples": 7273
+    },
+    {
+      "task_id": 16,
+      "num_classes": 9,
+      "classes": [
+        6,
+        102,
+        139,
+        164,
+        41,
+        110,
+        22,
+        19,
+        163
+      ],
+      "train_samples": 24675,
+      "test_samples": 8224,
+      "valid_samples": 8224
+    },
+    {
+      "task_id": 17,
+      "num_classes": 9,
+      "classes": [
+        64,
+        47,
+        113,
+        140,
+        14,
+        141,
+        36,
+        97,
+        136
+      ],
+      "train_samples": 59991,
+      "test_samples": 19996,
+      "valid_samples": 19997
+    }
+  ],
+  "task_results": [
+    {
+      "task_id": 0,
+      "train_loss": [
+        15.926698625087738
+      ],
+      "eval_current": {
+        "accuracy": 0.4041970802919708,
+        "macro_precision": 0.04175191656043905,
+        "macro_recall": 0.01755381463723183,
+        "macro_f1": 0.01953790781890542,
+        "weighted_f1": 0.44418897408173746
+      },
+      "eval_cumulative": {
+        "accuracy": 0.4041970802919708,
+        "macro_precision": 0.04175191656043905,
+        "macro_recall": 0.01755381463723183,
+        "macro_f1": 0.01953790781890542,
+        "weighted_f1": 0.44418897408173746
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 0,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.4041970802919708,
+            "macro_precision": 0.04175191656043905,
+            "macro_recall": 0.01755381463723183,
+            "macro_f1": 0.01953790781890542,
+            "weighted_f1": 0.44418897408173746
+          },
+          "num_samples": 4384
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 0,
+        "eval_task_id": 1,
+        "metrics": {
+          "accuracy": 0.007639662581569314,
+          "macro_precision": 0.013736263736263734,
+          "macro_recall": 0.001376225882030566,
+          "macro_f1": 0.00239198144271794,
+          "weighted_f1": 0.013423810666623931
+        },
+        "num_samples": 6283
+      }
+    },
+    {
+      "task_id": 1,
+      "train_loss": [
+        5.134532329198477
+      ],
+      "eval_current": {
+        "accuracy": 0.10679611650485436,
+        "macro_precision": 0.043931028551771584,
+        "macro_recall": 0.025735387230991565,
+        "macro_f1": 0.015971037360991924,
+        "weighted_f1": 0.086319950895493
+      },
+      "eval_cumulative": {
+        "accuracy": 0.07106027936626981,
+        "macro_precision": 0.02605775927004304,
+        "macro_recall": 0.020487688592763703,
+        "macro_f1": 0.009940783097194221,
+        "weighted_f1": 0.0550666989462114
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 1,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.019844890510948905,
+            "macro_precision": 0.025709219858156027,
+            "macro_recall": 0.0010124284317832705,
+            "macro_f1": 0.0019481391911863495,
+            "weighted_f1": 0.03818601664621929
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 1,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.10679611650485436,
+            "macro_precision": 0.043931028551771584,
+            "macro_recall": 0.025735387230991565,
+            "macro_f1": 0.015971037360991924,
+            "weighted_f1": 0.086319950895493
+          },
+          "num_samples": 6283
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 1,
+        "eval_task_id": 2,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 9503
+      }
+    },
+    {
+      "task_id": 2,
+      "train_loss": [
+        5.0972267006124765
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.0057511155180961825,
+        "macro_precision": 0.03147825758044873,
+        "macro_recall": 0.002731502000475005,
+        "macro_f1": 0.004796889256289548,
+        "weighted_f1": 0.010341587763805922
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 2,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.008895985401459854,
+            "macro_precision": 0.06086956521739131,
+            "macro_recall": 0.0008734119276998899,
+            "macro_f1": 0.0017170865152131912,
+            "weighted_f1": 0.017533089620273678
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 2,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.012255292057934108,
+            "macro_precision": 0.057190623162845386,
+            "macro_recall": 0.003293534672060515,
+            "macro_f1": 0.0058863347445669,
+            "weighted_f1": 0.02204397304242019
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 2,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 2,
+        "eval_task_id": 3,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 3283
+      }
+    },
+    {
+      "task_id": 3,
+      "train_loss": [
+        5.196426306015406
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.005073977742719482,
+        "macro_precision": 0.04252231907714993,
+        "macro_recall": 0.0029371170525744495,
+        "macro_f1": 0.005229336664168107,
+        "weighted_f1": 0.009033972025216898
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 3,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.009124087591240875,
+            "macro_precision": 0.03125,
+            "macro_recall": 0.0005236698785085882,
+            "macro_f1": 0.0010300782859497322,
+            "weighted_f1": 0.01794742239826285
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 3,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.011936972783702053,
+            "macro_precision": 0.04625378606727243,
+            "macro_recall": 0.0032889358939077406,
+            "macro_f1": 0.005827411628419904,
+            "weighted_f1": 0.021359503625137877
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 3,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0004209197095654004,
+            "macro_precision": 0.06439393939393939,
+            "macro_recall": 0.001621818204681148,
+            "macro_f1": 0.003083952325755605,
+            "weighted_f1": 0.0008301545981795359
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 3,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 3,
+        "eval_task_id": 4,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 1851
+      }
+    },
+    {
+      "task_id": 4,
+      "train_loss": [
+        5.355955622412941
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.004426177679418274,
+        "macro_precision": 0.036335999899823196,
+        "macro_recall": 0.0026249936707046072,
+        "macro_f1": 0.004664290094866381,
+        "weighted_f1": 0.007880850154805892
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 4,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.007071167883211679,
+            "macro_precision": 0.03125,
+            "macro_recall": 0.00040584415584415587,
+            "macro_f1": 0.0008012820512820513,
+            "weighted_f1": 0.01396102376941793
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 4,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.012573611332166163,
+            "macro_precision": 0.04725829725829725,
+            "macro_recall": 0.003496237296740623,
+            "macro_f1": 0.00617922744597822,
+            "weighted_f1": 0.022500319490695454
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 4,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0002104598547827002,
+            "macro_precision": 0.0625,
+            "macro_recall": 0.0016488037343488863,
+            "macro_f1": 0.0031331327260897854,
+            "weighted_f1": 0.0004103693310286359
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 4,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 4,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 4,
+        "eval_task_id": 5,
+        "metrics": {
+          "accuracy": 0.0004851799576570219,
+          "macro_precision": 9.82255114870271e-06,
+          "macro_recall": 0.019230769230769232,
+          "macro_f1": 1.9635073238823183e-05,
+          "weighted_f1": 4.953802881354473e-07
+        },
+        "num_samples": 22672
+      }
+    },
+    {
+      "task_id": 5,
+      "train_loss": [
+        5.106183507388696
+      ],
+      "eval_current": {
+        "accuracy": 0.056457304163726185,
+        "macro_precision": 0.09883162548801994,
+        "macro_recall": 0.008824958663617063,
+        "macro_f1": 0.010373045390399903,
+        "weighted_f1": 0.06966313130532595
+      },
+      "eval_cumulative": {
+        "accuracy": 0.1651242287810572,
+        "macro_precision": 0.050826124689682985,
+        "macro_recall": 0.0179978333579327,
+        "macro_f1": 0.01011102099982416,
+        "weighted_f1": 0.07294074028454116
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 5,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0009124087591240876,
+            "macro_precision": 0.043478260869565216,
+            "macro_recall": 7.285841787945574e-05,
+            "macro_f1": 0.0001454730602076628,
+            "weighted_f1": 0.0018217647076781238
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 5,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.012891930606398217,
+            "macro_precision": 0.06694390084801044,
+            "macro_recall": 0.005343322290520985,
+            "macro_f1": 0.0089049472618248,
+            "weighted_f1": 0.020965026276657094
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 5,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.6899926339050826,
+            "macro_precision": 0.03382948536050561,
+            "macro_recall": 0.03413326392503904,
+            "macro_f1": 0.03398069573103582,
+            "weighted_f1": 0.6869085183554647
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 5,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 5,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 5,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.056457304163726185,
+            "macro_precision": 0.09883162548801994,
+            "macro_recall": 0.008824958663617063,
+            "macro_f1": 0.010373045390399903,
+            "weighted_f1": 0.06966313130532595
+          },
+          "num_samples": 22672
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 5,
+        "eval_task_id": 6,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 3215
+      }
+    },
+    {
+      "task_id": 6,
+      "train_loss": [
+        5.2034275406285335
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.1554179445605673,
+        "macro_precision": 0.028071230385874536,
+        "macro_recall": 0.01438814611926158,
+        "macro_f1": 0.006649086059309553,
+        "weighted_f1": 0.052260638290657586
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 6,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0006843065693430657,
+            "macro_precision": 0.027777777777777776,
+            "macro_recall": 4.654843364520784e-05,
+            "macro_f1": 9.294112179934011e-05,
+            "weighted_f1": 0.0013663235307585927
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 6,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.011936972783702053,
+            "macro_precision": 0.06486042692939245,
+            "macro_recall": 0.0038461820245789366,
+            "macro_f1": 0.006794398812739625,
+            "weighted_f1": 0.02131155856166881
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 6,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.8005892875933915,
+            "macro_precision": 0.031119364523597218,
+            "macro_recall": 0.038081127617827254,
+            "macro_f1": 0.03425005964948612,
+            "weighted_f1": 0.7200477656543127
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 6,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 6,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 6,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.011908962597035992,
+            "macro_precision": 0.06052430981340933,
+            "macro_recall": 0.001458978335036613,
+            "macro_f1": 0.00279916900248525,
+            "weighted_f1": 0.0230409140728836
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 6,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 6,
+        "eval_task_id": 7,
+        "metrics": {
+          "accuracy": 0.0005588487715306469,
+          "macro_precision": 0.019886363636363636,
+          "macro_recall": 2.5926406044556382e-05,
+          "macro_f1": 5.1785298153854124e-05,
+          "weighted_f1": 0.0011162422669341032
+        },
+        "num_samples": 50103
+      }
+    },
+    {
+      "task_id": 7,
+      "train_loss": [
+        2.511331079869854
+      ],
+      "eval_current": {
+        "accuracy": 0.6961459393649083,
+        "macro_precision": 0.13879323821792328,
+        "macro_recall": 0.15005720623547544,
+        "macro_f1": 0.14418357957746641,
+        "weighted_f1": 0.6683853995335588
+      },
+      "eval_cumulative": {
+        "accuracy": 0.3443343139771359,
+        "macro_precision": 0.00864206506226404,
+        "macro_recall": 0.01875715077943443,
+        "macro_f1": 0.01181369030485628,
+        "weighted_f1": 0.21763107960620215
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 7,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 7,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 7,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 7,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 7,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 7,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 7,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 7,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.6961459393649083,
+            "macro_precision": 0.13879323821792328,
+            "macro_recall": 0.15005720623547544,
+            "macro_f1": 0.14418357957746641,
+            "weighted_f1": 0.6683853995335588
+          },
+          "num_samples": 50103
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 7,
+        "eval_task_id": 8,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 2840
+      }
+    },
+    {
+      "task_id": 8,
+      "train_loss": [
+        5.935937937568216
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.23599400772082124,
+        "macro_precision": 0.01670242614527557,
+        "macro_recall": 0.010951555539758935,
+        "macro_f1": 0.0043813480210705405,
+        "weighted_f1": 0.09207356548826191
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 8,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 8,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0004774789113480821,
+            "macro_precision": 0.057692307692307696,
+            "macro_recall": 0.0003740182022191747,
+            "macro_f1": 0.0007432181345224823,
+            "weighted_f1": 0.0009488067256095545
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 8,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 8,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 8,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 8,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.0002205363443895554,
+            "macro_precision": 0.0625,
+            "macro_recall": 7.681907571288102e-05,
+            "macro_f1": 0.00015344954578934447,
+            "weighted_f1": 0.00044053122954908485
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 8,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 8,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.49032992036405004,
+            "macro_precision": 0.07167044644304091,
+            "macro_recall": 0.06676345118783779,
+            "macro_f1": 0.04446906692293863,
+            "weighted_f1": 0.3262351300648843
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 8,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 8,
+        "eval_task_id": 9,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 2006
+      }
+    },
+    {
+      "task_id": 9,
+      "train_loss": [
+        5.251724521319072
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.23136423591482946,
+        "macro_precision": 0.014840803560875566,
+        "macro_recall": 0.009968285279761468,
+        "macro_f1": 0.00389963822534141,
+        "weighted_f1": 0.08820502584975896
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 9,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 9,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0004774789113480821,
+            "macro_precision": 0.05357142857142857,
+            "macro_recall": 0.0003473026163463765,
+            "macro_f1": 0.0006901311249137336,
+            "weighted_f1": 0.0009488067256095545
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 9,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 9,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 9,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 9,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.0002646436132674665,
+            "macro_precision": 0.058823529411764705,
+            "macro_recall": 8.676036786395974e-05,
+            "macro_f1": 0.00017326518236160444,
+            "weighted_f1": 0.0005285077166284014
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 9,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 9,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.48995070155479714,
+            "macro_precision": 0.0710195266088411,
+            "macro_recall": 0.06669731002489145,
+            "macro_f1": 0.04421171281356428,
+            "weighted_f1": 0.3245547903165513
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 9,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        },
+        {
+          "train_task_id": 9,
+          "eval_task_id": 9,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2006
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 9,
+        "eval_task_id": 10,
+        "metrics": {
+          "accuracy": 0.00011866619200189867,
+          "macro_precision": 0.0625,
+          "macro_recall": 0.00013919821826280623,
+          "macro_f1": 0.0002777777777777778,
+          "weighted_f1": 0.0002368049787060111
+        },
+        "num_samples": 8427
+      }
+    },
+    {
+      "task_id": 10,
+      "train_loss": [
+        5.012289524078369
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.21428509082021874,
+        "macro_precision": 0.014117969562893207,
+        "macro_recall": 0.009120292889466924,
+        "macro_f1": 0.0032982284006878326,
+        "weighted_f1": 0.07643615495416665
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 10,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0001591596371160274,
+            "macro_precision": 0.07142857142857142,
+            "macro_recall": 0.00011576753878212549,
+            "macro_f1": 0.00023116042533518263,
+            "weighted_f1": 0.0003178041945002877
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.0002646436132674665,
+            "macro_precision": 0.058823529411764705,
+            "macro_recall": 8.676036786395974e-05,
+            "macro_f1": 0.00017326518236160444,
+            "weighted_f1": 0.0005285077166284014
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.4898509071313095,
+            "macro_precision": 0.072678457106274,
+            "macro_recall": 0.06667576973631498,
+            "macro_f1": 0.044089000590911746,
+            "weighted_f1": 0.32376901683103265
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 9,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2006
+        },
+        {
+          "train_task_id": 10,
+          "eval_task_id": 10,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 8427
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 10,
+        "eval_task_id": 11,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 575
+      }
+    },
+    {
+      "task_id": 11,
+      "train_loss": [
+        5.201467854636056
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.21321498671205988,
+        "macro_precision": 0.012962822315446706,
+        "macro_recall": 0.008360095443094564,
+        "macro_f1": 0.0030083272997890845,
+        "weighted_f1": 0.07567824310217025
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 11,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0001591596371160274,
+            "macro_precision": 0.07142857142857142,
+            "macro_recall": 0.00011576753878212549,
+            "macro_f1": 0.00023116042533518263,
+            "weighted_f1": 0.0003178041945002877
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.0002646436132674665,
+            "macro_precision": 0.058823529411764705,
+            "macro_recall": 8.676036786395974e-05,
+            "macro_f1": 0.00017326518236160444,
+            "weighted_f1": 0.0005285077166284014
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.4898509071313095,
+            "macro_precision": 0.07676888567977677,
+            "macro_recall": 0.07143684152676502,
+            "macro_f1": 0.04721284429654403,
+            "weighted_f1": 0.3236152486632523
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 9,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2006
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 10,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 8427
+        },
+        {
+          "train_task_id": 11,
+          "eval_task_id": 11,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 575
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 11,
+        "eval_task_id": 12,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 2930
+      }
+    },
+    {
+      "task_id": 12,
+      "train_loss": [
+        5.215973676953997
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.20781387627888068,
+        "macro_precision": 0.01103336076874815,
+        "macro_recall": 0.0077287174875036845,
+        "macro_f1": 0.0027364286637683627,
+        "weighted_f1": 0.07187366154259309
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 12,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0001591596371160274,
+            "macro_precision": 0.07692307692307693,
+            "macro_recall": 0.00012467273407305821,
+            "macro_f1": 0.00024894199651481205,
+            "weighted_f1": 0.0003178041945002877
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.0002646436132674665,
+            "macro_precision": 0.0625,
+            "macro_recall": 9.218289085545723e-05,
+            "macro_f1": 0.0001840942562592047,
+            "weighted_f1": 0.0005285077166284014
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.4895714827455442,
+            "macro_precision": 0.06024223108521262,
+            "macro_recall": 0.0666273620057758,
+            "macro_f1": 0.04389522587153668,
+            "weighted_f1": 0.3224970728359357
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 9,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2006
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 10,
+          "metrics": {
+            "accuracy": 0.00011866619200189867,
+            "macro_precision": 0.03333333333333333,
+            "macro_recall": 0.00014847809948032666,
+            "macro_f1": 0.00029563932002956393,
+            "weighted_f1": 0.00023627991223437915
+          },
+          "num_samples": 8427
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 11,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 575
+        },
+        {
+          "train_task_id": 12,
+          "eval_task_id": 12,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2930
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 12,
+        "eval_task_id": 13,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 1084
+      }
+    },
+    {
+      "task_id": 13,
+      "train_loss": [
+        5.3348361895634575
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.20588975796434925,
+        "macro_precision": 0.008992783889665557,
+        "macro_recall": 0.0071597735992508914,
+        "macro_f1": 0.002489153206293233,
+        "weighted_f1": 0.0706140656077476
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 13,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0001591596371160274,
+            "macro_precision": 0.07692307692307693,
+            "macro_recall": 0.00012467273407305821,
+            "macro_f1": 0.00024894199651481205,
+            "weighted_f1": 0.0003178041945002877
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.0002646436132674665,
+            "macro_precision": 0.0625,
+            "macro_recall": 9.218289085545723e-05,
+            "macro_f1": 0.0001840942562592047,
+            "weighted_f1": 0.0005285077166284014
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.4895116060914516,
+            "macro_precision": 0.05572903300493848,
+            "macro_recall": 0.06661817547323251,
+            "macro_f1": 0.04387336037425675,
+            "weighted_f1": 0.32235162928032773
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 9,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2006
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 10,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 8427
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 11,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 575
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 12,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2930
+        },
+        {
+          "train_task_id": 13,
+          "eval_task_id": 13,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1084
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 13,
+        "eval_task_id": 14,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 18966
+      }
+    },
+    {
+      "task_id": 14,
+      "train_loss": [
+        5.084478384710748
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.1776183374118533,
+        "macro_precision": 0.0018295846504539149,
+        "macro_recall": 0.006663511170399708,
+        "macro_f1": 0.002013129265086298,
+        "weighted_f1": 0.053656008858336324
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 14,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.4896513182843343,
+            "macro_precision": 0.054162445314425184,
+            "macro_recall": 0.07688666735076587,
+            "macro_f1": 0.05059266647301624,
+            "weighted_f1": 0.32218823163498334
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 9,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2006
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 10,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 8427
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 11,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 575
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 12,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2930
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 13,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1084
+        },
+        {
+          "train_task_id": 14,
+          "eval_task_id": 14,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 18966
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 14,
+        "eval_task_id": 15,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 7272
+      }
+    },
+    {
+      "task_id": 15,
+      "train_loss": [
+        5.402391461438911
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.1687346107817379,
+        "macro_precision": 0.00518359955396368,
+        "macro_recall": 0.006250854518960361,
+        "macro_f1": 0.0018151675660378278,
+        "weighted_f1": 0.04881805424530666
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 15,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.00013232180663373325,
+            "macro_precision": 0.07692307692307693,
+            "macro_recall": 5.672793283412752e-05,
+            "macro_f1": 0.00011337225780851425,
+            "weighted_f1": 0.0002644485921817867
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.4895914416302417,
+            "macro_precision": 0.04866637246771839,
+            "macro_recall": 0.076876866146678,
+            "macro_f1": 0.0505828365090882,
+            "weighted_f1": 0.32213071165823465
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 9,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2006
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 10,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 8427
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 11,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 575
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 12,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2930
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 13,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1084
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 14,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 18966
+        },
+        {
+          "train_task_id": 15,
+          "eval_task_id": 15,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 7272
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 15,
+        "eval_task_id": 16,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 8224
+      }
+    },
+    {
+      "task_id": 16,
+      "train_loss": [
+        5.3187529180467745
+      ],
+      "eval_current": {
+        "accuracy": 0.0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "weighted_f1": 0.0
+      },
+      "eval_cumulative": {
+        "accuracy": 0.15970133708289394,
+        "macro_precision": 0.004311822514111759,
+        "macro_recall": 0.005916755286902896,
+        "macro_f1": 0.0016367184935729138,
+        "weighted_f1": 0.04406160895675548
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 16,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 8.821453775582216e-05,
+            "macro_precision": 0.07692307692307693,
+            "macro_recall": 3.781862188941835e-05,
+            "macro_f1": 7.560007560007559e-05,
+            "weighted_f1": 0.00017634237817724057
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.48961140051493923,
+            "macro_precision": 0.04951246469708438,
+            "macro_recall": 0.07688000010784822,
+            "macro_f1": 0.05058422114686118,
+            "weighted_f1": 0.3221395293689975
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 9,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2006
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 10,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 8427
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 11,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 575
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 12,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2930
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 13,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1084
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 14,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 18966
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 15,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 7272
+        },
+        {
+          "train_task_id": 16,
+          "eval_task_id": 16,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 8224
+        }
+      ],
+      "eval_next_task": {
+        "train_task_id": 16,
+        "eval_task_id": 17,
+        "metrics": {
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "weighted_f1": 0.0
+        },
+        "num_samples": 19996
+      }
+    },
+    {
+      "task_id": 17,
+      "train_loss": [
+        4.98142750111032
+      ],
+      "eval_current": {
+        "accuracy": 0.9803960792158432,
+        "macro_precision": 0.08916704949126023,
+        "macro_recall": 0.09088591045855567,
+        "macro_f1": 0.09001827549155562,
+        "weighted_f1": 0.9710368076241775
+      },
+      "eval_cumulative": {
+        "accuracy": 0.11370050802354649,
+        "macro_precision": 0.00376439038556565,
+        "macro_recall": 0.005647731689483543,
+        "macro_f1": 0.001203557388877278,
+        "weighted_f1": 0.024506038387408224
+      },
+      "eval_seen_tasks": [
+        {
+          "train_task_id": 17,
+          "eval_task_id": 0,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 4384
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 1,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 6283
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 2,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 9503
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 3,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3283
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 4,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1851
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 5,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 22672
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 6,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 3215
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 7,
+          "metrics": {
+            "accuracy": 0.002714408318863142,
+            "macro_precision": 0.07746249184605349,
+            "macro_recall": 0.0003965161202827195,
+            "macro_f1": 0.0007884133443629033,
+            "weighted_f1": 0.005397143673403174
+          },
+          "num_samples": 50103
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 8,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2840
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 9,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2006
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 10,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 8427
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 11,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 575
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 12,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 2930
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 13,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 1084
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 14,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 18966
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 15,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 7272
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 16,
+          "metrics": {
+            "accuracy": 0.0,
+            "macro_precision": 0.0,
+            "macro_recall": 0.0,
+            "macro_f1": 0.0,
+            "weighted_f1": 0.0
+          },
+          "num_samples": 8224
+        },
+        {
+          "train_task_id": 17,
+          "eval_task_id": 17,
+          "metrics": {
+            "accuracy": 0.9803960792158432,
+            "macro_precision": 0.08916704949126023,
+            "macro_recall": 0.09088591045855567,
+            "macro_f1": 0.09001827549155562,
+            "weighted_f1": 0.9710368076241775
+          },
+          "num_samples": 19996
+        }
+      ],
+      "eval_next_task": null
+    }
+  ],
+  "continual_metrics": {
+    "primary_metric": "accuracy",
+    "result_matrix": [
+      [
+        0.4041970802919708,
+        0.007639662581569314,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.019844890510948905,
+        0.10679611650485436,
+        0.0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.008895985401459854,
+        0.012255292057934108,
+        0.0,
+        0.0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.009124087591240875,
+        0.011936972783702053,
+        0.0004209197095654004,
+        0.0,
+        0.0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.007071167883211679,
+        0.012573611332166163,
+        0.0002104598547827002,
+        0.0,
+        0.0,
+        0.0004851799576570219,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0009124087591240876,
+        0.012891930606398217,
+        0.6899926339050826,
+        0.0,
+        0.0,
+        0.056457304163726185,
+        0.0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0006843065693430657,
+        0.011936972783702053,
+        0.8005892875933915,
+        0.0,
+        0.0,
+        0.011908962597035992,
+        0.0,
+        0.0005588487715306469,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6961459393649083,
+        0.0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0,
+        0.0004774789113480821,
+        0.0,
+        0.0,
+        0.0,
+        0.0002205363443895554,
+        0.0,
+        0.49032992036405004,
+        0.0,
+        0.0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0,
+        0.0004774789113480821,
+        0.0,
+        0.0,
+        0.0,
+        0.0002646436132674665,
+        0.0,
+        0.48995070155479714,
+        0.0,
+        0.0,
+        0.00011866619200189867,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0,
+        0.0001591596371160274,
+        0.0,
+        0.0,
+        0.0,
+        0.0002646436132674665,
+        0.0,
+        0.4898509071313095,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0,
+        0.0001591596371160274,
+        0.0,
+        0.0,
+        0.0,
+        0.0002646436132674665,
+        0.0,
+        0.4898509071313095,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0,
+        0.0001591596371160274,
+        0.0,
+        0.0,
+        0.0,
+        0.0002646436132674665,
+        0.0,
+        0.4895714827455442,
+        0.0,
+        0.0,
+        0.00011866619200189867,
+        0.0,
+        0.0,
+        0.0,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0,
+        0.0001591596371160274,
+        0.0,
+        0.0,
+        0.0,
+        0.0002646436132674665,
+        0.0,
+        0.4895116060914516,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        null,
+        null,
+        null
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.4896513182843343,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        null,
+        null
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.00013232180663373325,
+        0.0,
+        0.4895914416302417,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        null
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.821453775582216e-05,
+        0.0,
+        0.48961140051493923,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.002714408318863142,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9803960792158432
+      ]
+    ],
+    "average_accuracy": [
+      0.4041970802919708,
+      0.06332050350790164,
+      0.007050425819797988,
+      0.005370495021127083,
+      0.003971047814032108,
+      0.12670904623905518,
+      0.11787421850621038,
+      0.08701824242061354,
+      0.054558659513309744,
+      0.04906928240794127,
+      0.04457042821651755,
+      0.04085622586514109,
+      0.037701073245225356,
+      0.03499538638155965,
+      0.032643421218955616,
+      0.030607735214804716,
+      0.02880585970898206,
+      0.054617249307483684
+    ],
+    "forgetting_per_task": {
+      "0": 0.4041970802919708,
+      "1": 0.10679611650485436,
+      "2": 0.8005892875933915,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.056457304163726185,
+      "6": 0.0,
+      "7": 0.6934315310460452,
+      "8": 0.0,
+      "9": 0.0,
+      "10": 0.00011866619200189867,
+      "11": 0.0,
+      "12": 0.0,
+      "13": 0.0,
+      "14": 0.0,
+      "15": 0.0,
+      "16": 0.0,
+      "17": -0.9803960792158432
+    },
+    "mean_forgetting": 0.06006632814311927,
+    "backward_transfer": -0.07416953129450568,
+    "forward_transfer": 0.0005177857354564048,
+    "forward_transfer_note": "Raw FWT from R[i-1,i]; no random/init baseline subtracted."
+  }
+}

@@ -25,6 +25,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--valid-file", type=str, default=None)
     parser.add_argument("--target-col", type=str, default="class")
     parser.add_argument("--columns-to-drop", nargs="*", default=None)
+    parser.add_argument("--no-scale-numerical", action="store_true", default=None)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--num-tasks", type=int, default=None)
@@ -95,6 +96,7 @@ def build_data_manager(args: argparse.Namespace) -> DDIIncrementalDataManager:
         columns_to_drop=args.columns_to_drop,
         target_col=args.target_col,
         seed=args.seed,
+        scale_numerical=not args.no_scale_numerical,
     )
 
 
@@ -209,6 +211,13 @@ def main() -> None:
     args.class_order = resolve_setting(
         args.class_order, config_defaults.get("class_order"), "balanced"
     )
+    args.no_scale_numerical = bool(
+        resolve_setting(
+            args.no_scale_numerical,
+            not config_defaults.get("scale_numerical", True),
+            False,
+        )
+    )
     args.columns_to_drop = normalize_columns_to_drop(args.columns_to_drop)
     args.run_name = args.run_name or build_run_name(args.model, args.method)
 
@@ -245,6 +254,7 @@ def main() -> None:
             "num_continuous": data_manager.num_continuous,
             "categories": data_manager.categories,
             "class_order": args.class_order,
+            "scale_numerical": not args.no_scale_numerical,
         },
         "runtime": {
             "seed": args.seed,
