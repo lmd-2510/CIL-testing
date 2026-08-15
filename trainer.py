@@ -107,6 +107,12 @@ class ContinualTrainer:
         self.evaluator = CILEvaluator(device=self.config.device)
         self.matrix_evaluations: List[List[Any]] = []
 
+    def _seen_classes(self, train_task_id: int) -> List[int]:
+        classes: List[int] = []
+        for task_id in range(train_task_id + 1):
+            classes.extend(self.data_manager.task_classes.get(task_id, []))
+        return sorted(set(int(cls) for cls in classes))
+
     def run(self) -> Dict[str, Any]:
         print("\n=== Start continual training ===")
         for task_id in sorted(self.data_manager.task_classes.keys()):
@@ -123,6 +129,10 @@ class ContinualTrainer:
             "config_defaults": self.summary.get("config_defaults", {}),
             "method_config": self.summary.get("method_config", {}),
             "criterion_config": self.summary.get("criterion_config", {}),
+            "evaluation_config": {
+                "mask_unseen_classes": True,
+                "fwt_next_task_mask": None,
+            },
             "data": self.summary.get("data", {}),
             "runtime": self.summary.get("runtime", {}),
             "tasks": self.summary.get("tasks", []),
@@ -157,12 +167,14 @@ class ContinualTrainer:
 
         self.method.after_task(task_id, self.model, train_loader)
 
+        allowed_classes = self._seen_classes(task_id)
         seen_evaluations = self.evaluator.evaluate_seen_tasks(
             model=self.model,
             data_manager=self.data_manager,
             train_task_id=task_id,
             batch_size=self.config.batch_size,
             num_workers=self.config.num_workers,
+            allowed_classes=allowed_classes,
         )
         stage_evaluations = list(seen_evaluations)
 
@@ -174,6 +186,7 @@ class ContinualTrainer:
                 eval_task_id=next_task_id,
                 batch_size=self.config.batch_size,
                 num_workers=self.config.num_workers,
+                allowed_classes=None,
             )
             next_evaluation.train_task_id = task_id
             stage_evaluations.append(next_evaluation)
@@ -188,6 +201,7 @@ class ContinualTrainer:
             train_task_id=task_id,
             batch_size=self.config.batch_size,
             num_workers=self.config.num_workers,
+            allowed_classes=allowed_classes,
         )
 
         if self.config.save_checkpoints:

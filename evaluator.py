@@ -34,16 +34,24 @@ class CILEvaluator:
         self,
         model: torch.nn.Module,
         loader: DataLoader,
+        allowed_classes: Optional[List[int]] = None,
     ) -> Tuple[List[int], List[int]]:
         model.eval()
         y_true: List[int] = []
         y_pred: List[int] = []
+        allowed_tensor = None
+        if allowed_classes is not None:
+            allowed_tensor = torch.as_tensor(allowed_classes, dtype=torch.long, device=self.device)
 
         with torch.no_grad():
             for cat_x, cont_x, targets in loader:
                 cat_x = cat_x.to(self.device)
                 cont_x = cont_x.to(self.device)
                 logits = model(cat_x, cont_x)
+                if allowed_tensor is not None:
+                    masked_logits = torch.full_like(logits, float("-inf"))
+                    masked_logits.index_copy_(1, allowed_tensor, logits.index_select(1, allowed_tensor))
+                    logits = masked_logits
                 preds = torch.argmax(logits, dim=1)
                 y_true.extend(targets.cpu().tolist())
                 y_pred.extend(preds.cpu().tolist())
@@ -55,8 +63,9 @@ class CILEvaluator:
         self,
         model: torch.nn.Module,
         loader: DataLoader,
+        allowed_classes: Optional[List[int]] = None,
     ) -> Dict[str, float]:
-        y_true, y_pred = self.predict_loader(model, loader)
+        y_true, y_pred = self.predict_loader(model, loader, allowed_classes=allowed_classes)
         return classification_metrics(y_true, y_pred)
 
     def evaluate_single_task(
@@ -66,6 +75,7 @@ class CILEvaluator:
         eval_task_id: int,
         batch_size: int = 256,
         num_workers: int = 0,
+        allowed_classes: Optional[List[int]] = None,
     ) -> TaskEvaluation:
         try:
             loader = data_manager.get_test_loader(
@@ -81,7 +91,7 @@ class CILEvaluator:
                 num_samples=0,
             )
 
-        metrics = self.evaluate_loader(model, loader)
+        metrics = self.evaluate_loader(model, loader, allowed_classes=allowed_classes)
         num_samples = len(loader.dataset) if hasattr(loader, "dataset") else 0
         return TaskEvaluation(
             train_task_id=-1,
@@ -97,6 +107,7 @@ class CILEvaluator:
         train_task_id: int,
         batch_size: int = 256,
         num_workers: int = 0,
+        allowed_classes: Optional[List[int]] = None,
     ) -> List[TaskEvaluation]:
         evaluations: List[TaskEvaluation] = []
         for eval_task_id in range(train_task_id + 1):
@@ -106,7 +117,7 @@ class CILEvaluator:
                     batch_size=batch_size,
                     num_workers=num_workers,
                 )
-                metrics = self.evaluate_loader(model, loader)
+                metrics = self.evaluate_loader(model, loader, allowed_classes=allowed_classes)
                 num_samples = len(loader.dataset) if hasattr(loader, "dataset") else 0
             except ValueError:
                 metrics = empty_metrics()
@@ -129,6 +140,7 @@ class CILEvaluator:
         train_task_id: int,
         batch_size: int = 256,
         num_workers: int = 0,
+        allowed_classes: Optional[List[int]] = None,
     ) -> Dict[str, float]:
         try:
             loader = data_manager.get_cumulative_test_loader(
@@ -138,7 +150,7 @@ class CILEvaluator:
             )
         except ValueError:
             return empty_metrics()
-        return self.evaluate_loader(model, loader)
+        return self.evaluate_loader(model, loader, allowed_classes=allowed_classes)
 
 
 def build_result_matrix(
