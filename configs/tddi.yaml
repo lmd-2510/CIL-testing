@@ -1,6 +1,6 @@
 # Shared experiment config
 seed: 42
-epochs_per_task: 1
+epochs_per_task: 3
 batch_size: 256
 learning_rate: 9.4526e-5
 weight_decay: 1.5446e-4
@@ -17,9 +17,13 @@ depth: 3
 ff_dropout: 0.2
 
 # Memory-based methods: GEM and A-GEM
-memory_samples_per_class: 10
+memory_samples_per_class: 20
 gem_memory_strength: 0.5
 
+# ER method
+er_replay_weight: 1.0
+er_replay_batch_size: 256
+
 # EWC method
-ewc_lambda: 10.0
-fisher_n_batches: 50
+ewc_lambda: 100.0
+fisher_n_batches: 200

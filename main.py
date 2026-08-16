@@ -11,7 +11,7 @@ from utils import get_device, json_safe, load_config_defaults, set_seed
 DEFAULT_CONFIG_PATH = "configs/tddi.yaml"
 DEFAULT_RESULTS_DIR = "results"
 SUPPORTED_MODELS = {"tddi", "mlp_resnet", "tabnet", "deepddi_mlp"}
-SUPPORTED_METHODS = {"finetune", "ewc", "gem", "agem"}
+SUPPORTED_METHODS = {"finetune", "ewc", "gem", "agem", "er"}
 
 
 def build_parser() -> argparse.ArgumentParser:

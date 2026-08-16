@@ -1,7 +1,7 @@
 # DỰ ÁN: CIL-DDI BENCHMARK (Class Incremental Learning for Drug-Drug Interaction)
 
 ## 1. MỤC TIÊU DỰ ÁN
-Chuyển đổi mô hình T-DDI v1.0.0 từ bài toán phân loại tĩnh sang kịch bản **Class Incremental Learning (CIL)**. Benchmark đánh giá 3 kiến trúc mô hình (`tddi`, `mlp_resnet`, `tabnet`) với 4 phương pháp Continual Learning (`finetune`, `ewc`, `gem`, `agem`).
+Chuyển đổi mô hình T-DDI v1.0.0 từ bài toán phân loại tĩnh sang kịch bản **Class Incremental Learning (CIL)**. Benchmark đánh giá 3 kiến trúc mô hình (`tddi`, `mlp_resnet`, `tabnet`) với 5 phương pháp Continual Learning (`finetune`, `ewc`, `gem`, `agem`, `er`).
 
 ---
 
@@ -15,18 +15,19 @@ Chuyển đổi mô hình T-DDI v1.0.0 từ bài toán phân loại tĩnh sang k
 - [x] 7. Implement EWC (`methods/ewc.py`).
 - [x] 8. Implement GEM (`methods/gem.py`).
 - [x] 9. Implement A-GEM (`methods/agem.py`).
-- [x] 10. Smoke test end-to-end trên CPU với mock data.
-- [ ] 11. Chuẩn bị dataset thật dạng sample-level.
-- [ ] 12. Train từng tổ hợp `Model × CL method`.
-- [ ] 13. Evaluate sau từng task.
-- [ ] 14. Báo Accuracy/Macro-F1, ma trận $R_{i,j}$ và Forgetting Index.
-- [ ] 15. Tạo bảng comparison 3 Architecture × 4 CL baselines.
+- [x] 10. Implement ER / Experience Replay (`methods/er.py`).
+- [x] 11. Smoke test end-to-end trên CPU với mock data.
+- [ ] 12. Chuẩn bị dataset thật dạng sample-level.
+- [ ] 13. Train từng tổ hợp `Model × CL method`.
+- [ ] 14. Evaluate sau từng task.
+- [ ] 15. Báo Accuracy/Macro-F1, ma trận $R_{i,j}$ và Forgetting Index.
+- [ ] 16. Tạo bảng comparison 3 Architecture × 5 CL baselines.
 
 ---
 
 ## 2.1 TIẾN ĐỘ HIỆN TẠI
 - Framework CIL lõi đã chạy được: `main.py`, `trainer.py`, `evaluator.py`, `data/ddi_incremental.py`.
-- Đã có đủ 4 methods: `finetune`, `ewc`, `gem`, `agem`.
+- Đã có 5 methods: `finetune`, `ewc`, `gem`, `agem`, `er`.
 - Đã có đủ 3 models: `tddi`, `mlp_resnet`, `tabnet`.
 - Smoke test CPU đã pass với mock data nhỏ 16 dòng, 4 class, 2 tasks.
 - Kết quả smoke test đã được xóa khỏi `results/`; mock data vẫn giữ lại để test nhanh lại khi cần.
@@ -36,7 +37,7 @@ Chuyển đổi mô hình T-DDI v1.0.0 từ bài toán phân loại tĩnh sang k
 1. Chuẩn bị dataset thật dạng sample-level, có cột `class`, feature categorical/numerical.
 2. Tạo train/test/valid thật để evaluator có metric có ý nghĩa.
 3. Chạy thử từng model với `finetune` trước.
-4. Sau đó chạy đủ 12 tổ hợp `3 models × 4 methods`.
+4. Sau đó chạy đủ 15 tổ hợp `3 models × 5 methods`.
 5. Tổng hợp Accuracy, Macro-F1, ma trận `R_{i,j}`, Forgetting Index.
 
 ---
@@ -58,7 +59,8 @@ CIL-testing/
 │   ├── finetune.py
 │   ├── ewc.py
 │   ├── gem.py
-│   └── agem.py
+│   ├── agem.py
+│   └── er.py
 ├── models/
 │   ├── tddi.py
 │   ├── mlp_resnet.py

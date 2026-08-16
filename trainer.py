@@ -257,6 +257,11 @@ def resolve_method_kwargs(name: str, summary: Dict[str, Any]) -> Dict[str, Any]:
     elif name == "gem":
         if "gem_memory_strength" in config_defaults:
             method_kwargs["memory_strength"] = config_defaults["gem_memory_strength"]
+    elif name == "er":
+        if "er_replay_weight" in config_defaults:
+            method_kwargs["replay_weight"] = config_defaults["er_replay_weight"]
+        if "er_replay_batch_size" in config_defaults:
+            method_kwargs["replay_batch_size"] = config_defaults["er_replay_batch_size"]
 
     return method_kwargs
 
